@@ -152,11 +152,83 @@ abstract class AppLocalizations {
   /// **'Cart'**
   String get cart;
 
+  /// No description provided for @myCart.
+  ///
+  /// In en, this message translates to:
+  /// **'My Cart'**
+  String get myCart;
+
+  /// No description provided for @kabse.
+  ///
+  /// In en, this message translates to:
+  /// **'Kabsa'**
+  String get kabse;
+
+  /// No description provided for @migas.
+  ///
+  /// In en, this message translates to:
+  /// **'Migas'**
+  String get migas;
+
+  /// No description provided for @bigMac.
+  ///
+  /// In en, this message translates to:
+  /// **'Big Mac'**
+  String get bigMac;
+
   /// No description provided for @checkout.
   ///
   /// In en, this message translates to:
   /// **'Checkout'**
   String get checkout;
+
+  /// No description provided for @homeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'StreetBite Home'**
+  String get homeTitle;
+
+  /// No description provided for @changeTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Theme'**
+  String get changeTheme;
+
+  /// No description provided for @hotDeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Hot Street Food Deals!'**
+  String get hotDeals;
+
+  /// No description provided for @firstOrderOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'50% Off On First Order'**
+  String get firstOrderOffer;
+
+  /// No description provided for @fastDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast Delivery Nearby'**
+  String get fastDelivery;
+
+  /// No description provided for @exploreMeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Meals'**
+  String get exploreMeals;
+
+  /// No description provided for @mealAddedToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to cart!'**
+  String get mealAddedToCart;
+
+  /// No description provided for @successOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order has been placed successfully'**
+  String get successOrder;
 }
 
 class _AppLocalizationsDelegate

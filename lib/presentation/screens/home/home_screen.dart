@@ -1,5 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:streetbite/l10n/app_localizations.dart';
+
+import '../../../core/utils/meal_translator.dart';
 import '../../../core/theme/theme_cubit.dart';
 import '../../blocs/meal/meal_bloc.dart';
 import '../../blocs/cart/cart_bloc.dart';
@@ -22,15 +26,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    final isArabic =
+        Localizations.localeOf(context).languageCode == 'ar';
+
     final themeCubit = context.watch<ThemeCubit>();
     final isDark = themeCubit.state == ThemeMode.dark;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('StreetBite Home'),
+        title: Text(t.homeTitle),
         actions: [
           IconButton(
-            icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
+            tooltip: t.changeTheme,
+            icon: Icon(
+              isDark ? Icons.light_mode : Icons.dark_mode,
+            ),
             onPressed: () => themeCubit.toggleTheme(),
           ),
           BlocBuilder<CartBloc, CartState>(
@@ -39,11 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 alignment: Alignment.center,
                 children: [
                   IconButton(
+                    tooltip: t.cart,
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const CartScreen()),
+                        MaterialPageRoute(
+                          builder: (_) => const CartScreen(),
+                        ),
                       );
                     },
                   ),
@@ -56,52 +70,69 @@ class _HomeScreenState extends State<HomeScreen> {
                         backgroundColor: Colors.red,
                         child: Text(
                           '${state.items.length}',
-                          style: const TextStyle(fontSize: 10, color: Colors.white),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    )
+                    ),
                 ],
               );
             },
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // PageView Banner
             SizedBox(
               height: 160,
               child: PageView(
                 children: [
-                  _buildBannerCard('Hot Street Food Deals!', Colors.orange),
-                  _buildBannerCard('50% Off On First Order', Colors.deepOrangeAccent),
-                  _buildBannerCard('Fast Delivery Nearby', Colors.amber),
+                  _buildBannerCard(t.hotDeals, Colors.orange),
+                  _buildBannerCard(
+                    t.firstOrderOffer,
+                    Colors.deepOrangeAccent,
+                  ),
+                  _buildBannerCard(t.fastDelivery, Colors.amber),
                 ],
               ),
             ),
-            const Padding(
-  padding: EdgeInsets.all(12.0),
-  child: Text(
-    'Explore Meals',
-    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  ),
-),
-            // Meals Grid View
+
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                t.exploreMeals,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
             BlocBuilder<MealBloc, MealState>(
               builder: (context, state) {
                 if (state is MealLoading) {
                   return const SizedBox(
                     height: 200,
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
-                } else if (state is MealLoaded) {
+                }
+
+                if (state is MealLoaded) {
                   return GridView.builder(
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    physics:
+                        const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.75,
                       crossAxisSpacing: 10,
@@ -110,12 +141,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: state.meals.length,
                     itemBuilder: (context, index) {
                       final meal = state.meals[index];
+
+                      final translatedName =
+                          MealTranslator.translateName(
+                        meal.name,
+                        isArabic: isArabic,
+                      );
+
+                      final translatedCategory =
+                          MealTranslator.translateCategory(
+                        meal.category,
+                        isArabic: isArabic,
+                      );
+
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => MealDetailsScreen(meal: meal),
+                              builder: (_) =>
+                                  MealDetailsScreen(meal: meal),
                             ),
                           );
                         },
@@ -125,64 +170,107 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                 child: ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                                  borderRadius:
+                                      const BorderRadius.vertical(
+                                    top: Radius.circular(12),
+                                  ),
                                   child: Image.network(
                                     meal.thumbUrl,
                                     width: double.infinity,
                                     fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) =>
-                                        const Icon(Icons.fastfood, size: 50),
+                                    errorBuilder:
+                                        (context, error, stackTrace) {
+                                      return const Icon(
+                                        Icons.fastfood,
+                                        size: 50,
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      meal.name,
+                                      translatedName,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                    Text(meal.category, style: const TextStyle(color: Colors.grey)),
+                                    Text(
+                                      translatedCategory,
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                     const SizedBox(height: 4),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text('\$15.0', style: TextStyle(fontWeight: FontWeight.bold)),
+                                        const Text(
+                                          '\$15.0',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                         IconButton(
-                                          icon: const Icon(Icons.add_shopping_cart, color: Colors.orange),
+                                          icon: const Icon(
+                                            Icons.add_shopping_cart,
+                                            color: Colors.orange,
+                                          ),
                                           onPressed: () {
-                                            context.read<CartBloc>().add(AddMealToCart(meal));
-                                            ScaffoldMessenger.of(context).showSnackBar(
+                                            context
+                                                .read<CartBloc>()
+                                                .add(
+                                                  AddMealToCart(meal),
+                                                );
+
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
                                               SnackBar(
-                                                content: Text('${meal.name} added to cart!'),
-                                                duration: const Duration(seconds: 1),
+                                                content: Text(
+                                                  '$translatedName: '
+                                                  '${t.mealAddedToCart}',
+                                                ),
+                                                duration:
+                                                    const Duration(
+                                                  seconds: 1,
+                                                ),
                                               ),
                                             );
                                           },
-                                        )
+                                        ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
                       );
                     },
                   );
-                } else if (state is MealError) {
-                  return Center(child: Text(state.message));
                 }
-                return const SizedBox();
+
+                if (state is MealError) {
+                  return Center(
+                    child: Text(state.message),
+                  );
+                }
+
+                return const SizedBox.shrink();
               },
             ),
           ],
@@ -193,15 +281,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBannerCard(String text, Color color) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 8,
+      ),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
-        child: Text(
-          text,
-          style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );

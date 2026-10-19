@@ -1,4 +1,6 @@
+
 {
+  "@@locale": "en",
   "appName": "StreetBite",
   "welcomeText": "Discover Best Street Food Nearby",
   "login": "Login",
@@ -8,5 +10,17 @@
   "addToCart": "Add to Cart",
   "totalPrice": "Total Price",
   "cart": "Cart",
-  "checkout": "Checkout"
+  "myCart": "My Cart",
+  "kabse": "Kabsa",
+  "migas": "Migas",
+  "bigMac": "Big Mac",
+  "checkout": "Checkout",
+  "homeTitle": "StreetBite Home",
+"changeTheme": "Change Theme",
+"hotDeals": "Hot Street Food Deals!",
+"firstOrderOffer": "50% Off On First Order",
+"fastDelivery": "Fast Delivery Nearby",
+"exploreMeals": "Explore Meals",
+"mealAddedToCart": "Added to cart!",
+  "successOrder": "Your order has been placed successfully"
 }

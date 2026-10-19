@@ -36,5 +36,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cart => 'Cart';
 
   @override
+  String get myCart => 'My Cart';
+
+  @override
+  String get kabse => 'Kabsa';
+
+  @override
+  String get migas => 'Migas';
+
+  @override
+  String get bigMac => 'Big Mac';
+
+  @override
   String get checkout => 'Checkout';
+
+  @override
+  String get homeTitle => 'StreetBite Home';
+
+  @override
+  String get changeTheme => 'Change Theme';
+
+  @override
+  String get hotDeals => 'Hot Street Food Deals!';
+
+  @override
+  String get firstOrderOffer => '50% Off On First Order';
+
+  @override
+  String get fastDelivery => 'Fast Delivery Nearby';
+
+  @override
+  String get exploreMeals => 'Explore Meals';
+
+  @override
+  String get mealAddedToCart => 'Added to cart!';
+
+  @override
+  String get successOrder => 'Your order has been placed successfully';
 }

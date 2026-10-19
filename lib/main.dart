@@ -1,25 +1,30 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:streetbite/l10n/app_localizations.dart';
 
+import 'firebase_options.dart';
 import 'injection.dart';
+
 import 'core/theme/theme_cubit.dart';
+import 'core/bloc/locale_cubit.dart';
+
 import 'presentation/blocs/auth/auth_cubit.dart';
 import 'presentation/blocs/meal/meal_bloc.dart';
 import 'presentation/blocs/cart/cart_bloc.dart';
-import 'presentation/screens/splash/splash_screen.dart';
 
-// ملاحظة: سيتم توليد هذا الملف تلقائياً بعد تشغيل flutter gen-l10n أو flutter run
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'presentation/screens/splash/splash_screen.dart';
+import 'presentation/widgets/language_switcher.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // تهيئة Firebase
-  await Firebase.initializeApp();
 
-  // تهيئة حقن التبعيات GetIt
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await initServiceLocator();
 
   runApp(const StreetBiteApp());
@@ -35,6 +40,9 @@ class StreetBiteApp extends StatelessWidget {
         BlocProvider<ThemeCubit>(
           create: (context) => sl<ThemeCubit>(),
         ),
+        BlocProvider<LocaleCubit>(
+          create: (context) => LocaleCubit(),
+        ),
         BlocProvider<AuthCubit>(
           create: (context) => sl<AuthCubit>(),
         ),
@@ -47,45 +55,59 @@ class StreetBiteApp extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
-          return MaterialApp(
-            title: 'StreetBite V1.0',
-            debugShowCheckedModeBanner: false,
-            
-            // إعداد الثيمات (Light & Dark)
-            themeMode: themeMode,
-            theme: ThemeData(
-              brightness: Brightness.light,
-              primarySwatch: Colors.orange,
-              scaffoldBackgroundColor: Colors.white,
-              appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.orange,
-                foregroundColor: Colors.white,
-              ),
-            ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              primarySwatch: Colors.orange,
-              scaffoldBackgroundColor: const Color(0xFF121212),
-              appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xFF1F1F1F),
-                foregroundColor: Colors.white,
-              ),
-            ),
+          return BlocBuilder<LocaleCubit, Locale>(
+            builder: (context, locale) {
+              return MaterialApp(
+                title: 'StreetBite V1.0',
+                debugShowCheckedModeBanner: false,
 
-            // إعداد اللغات (Localization) - الإنجليزية والعربية
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              // AppLocalizations.delegate, // سيتم تفعيلها عند توليد ملفات الترجمة
-            ],
-            supportedLocales: const [
-              Locale('en', ''), // English
-              Locale('ar', ''), // Arabic
-            ],
+                // اللغة الحالية
+                locale: locale,
 
-            // الشاشة الابتدائية (Splash Screen)
-            home: const SplashScreen(),
+                // اللغات المدعومة
+                supportedLocales: AppLocalizations.supportedLocales,
+
+                // ملفات الترجمة
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+
+                // الوضع الفاتح والداكن
+                themeMode: themeMode,
+
+                theme: ThemeData(
+                  brightness: Brightness.light,
+                  primarySwatch: Colors.orange,
+                  scaffoldBackgroundColor: Colors.white,
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+
+                darkTheme: ThemeData(
+                  brightness: Brightness.dark,
+                  primarySwatch: Colors.orange,
+                  scaffoldBackgroundColor: const Color(0xFF121212),
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: Color(0xFF1F1F1F),
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+
+                // زر تغيير اللغة على مستوى التطبيق كله
+                builder: (context, child) {
+                  return LanguageSwitcher(
+                    child: child ?? const SizedBox.shrink(),
+                  );
+                },
+
+                home: const SplashScreen(),
+              );
+            },
           );
         },
       ),

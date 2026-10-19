@@ -1,3 +1,4 @@
+
 {
   "appName": "ستريت بايت",
   "welcomeText": "اكتشف أفضل أطعمة الشارع بالقرب منك",
@@ -8,5 +9,17 @@
   "addToCart": "أضف إلى السلة",
   "totalPrice": "الإجمالي",
   "cart": "السلة",
-  "checkout": "إتمام الطلب"
+  "myCart": "سلة التسوق",
+  "kabse": "كبسة",
+  "migas": "ميجاس",
+  "bigMac": "بيج ماك",
+  "checkout": "إتمام الطلب",
+  "homeTitle": "الرئيسية - ستريت بايت",
+"changeTheme": "تغيير المظهر",
+"hotDeals": "عروض مميزة على أطعمة الشارع!",
+"firstOrderOffer": "خصم 50% على أول طلب",
+"fastDelivery": "توصيل سريع بالقرب منك",
+"exploreMeals": "اكتشف الوجبات",
+"mealAddedToCart": "تمت الإضافة إلى السلة!",
+  "successOrder": "تم تأكيد طلبك بنجاح"
 }

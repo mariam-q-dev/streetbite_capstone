@@ -1,32 +1,51 @@
-# 🍔 StreetBite - Street Food Discovery & Ordering App
+# 🍔 StreetBite V1.0 - Food Discovery & Ordering App
 
-**StreetBite** is a cross-platform mobile application designed to connect street food vendors with hungry customers, enabling seamless discovery, real-time map tracking, and food ordering. Developed as a Capstone project using Flutter and Clean Architecture.
-
----
-
-## 🚀 Features
-* **User Authentication:** Secure Sign-up and Login powered by Firebase Authentication.
-* **Vendor Discovery & Map Integration:** Interactive Google Maps displaying nearby street food vendors.
-* **Menu & Cart Management:** Browse vendor menus, customize orders, and manage the shopping cart.
-* **State Management:** Robust and scalable state management using `Flutter BLoC / Cubit`.
-* **Local Storage & Security:** Data persistence using `SharedPreferences` and device security integration.
+**StreetBite V1.0** is a production-oriented cross-platform mobile application designed to connect street food vendors with hungry customers. Built as a Capstone graduation project using Flutter, Firebase, and Clean Architecture.
 
 ---
 
-## 🛠️ Tech Stack & Architecture
-* **Framework:** Flutter (Dart)
-* **Architecture:** Clean Architecture (Presentation, Domain, Data Layers)
-* **State Management:** `flutter_bloc`
-* **Backend & Database:** Firebase (Auth, Cloud Firestore)
-* **APIs & Packages:** Google Maps Flutter, Geolocator, Image Picker, Shared Preferences.
+## 📱 Project Overview & Features
+* **Bilingual Support:** Full localization for English (`en`) and Arabic (`ar`) with runtime language toggling.
+* **Authentication & Profiles:** Secure email/password authentication via Firebase Auth, persistent states, and biometric fingerprint login option.
+* **Live Menu & Dio Integration:** Fetching meals dynamically from TheMealDB API, supporting caching via `SharedPreferences`, and state management using `flutter_bloc` / `Cubit`.
+* **Vendor Discovery Map:** Interactive Google Maps integrated with `google_maps_flutter` displaying nearby hardcoded vendors with custom info windows.
+* **Cart & Checkout:** Solid implementation of payment handling (Cash/Card options sharing a common interface adhering to SOLID principles), reactive cart updates, and storing orders directly to Cloud Firestore.
 
 ---
 
-## 📂 Project Structure
+## 🛠️ Architecture & Tech Stack
+* **Architecture:** Clean Architecture (`Data`, `Domain`, `Presentation` layers) ensuring separation of concerns and testable components.
+* **Design Patterns:** Builder Pattern (User model), Factory Pattern (MealRepository data source selection), and Singleton Pattern (Firestore service).
+* **Core Technologies:**
+  * **Framework:** Flutter & Dart
+  * **State Management:** `flutter_bloc`, `equatable`, `get_it` (Dependency Injection)
+  * **Backend & Database:** Firebase Authentication, Cloud Firestore
+  * **APIs & Utilities:** `Dio`, `google_maps_flutter`, `image_picker`, `local_auth`, `device_info_plus`
+
+---
+
+## 📂 Expected Repository Structure
 ```text
-lib/
-│
-├── core/                  # Core utilities, constants, and themes
-├── data/                  # Data layer (Models, Repositories, Data Sources)
-├── domain/                # Domain layer (Entities, Use Cases, Repository contracts)
-└── presentation/          # Presentation layer (Screens, Widgets, BLoCs/Cubits)
+streetbite-capstone/
+├── flutter_app/
+│   ├── lib/
+│   │   ├── main.dart
+│   │   ├── injection.dart
+│   │   ├── core/
+│   │   ├── data/
+│   │   │   ├── datasources/
+│   │   │   ├── models/
+│   │   │   └── repositories/
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   ├── repositories/
+│   │   │   └── usecases/
+│   │   ├── presentation/
+│   │   │   ├── blocs/
+│   │   │   ├── screens/
+│   │   │   └── widgets/
+│   │   └── l10n/
+│   │       ├── app_en.arb
+│   │       └── app_ar.arb
+│   ├── pubspec.yaml
+│   └── README.md

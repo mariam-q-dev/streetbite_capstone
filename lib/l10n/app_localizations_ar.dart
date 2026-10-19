@@ -36,5 +36,41 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cart => 'السلة';
 
   @override
+  String get myCart => 'سلة التسوق';
+
+  @override
+  String get kabse => 'كبسة';
+
+  @override
+  String get migas => 'ميجاس';
+
+  @override
+  String get bigMac => 'بيج ماك';
+
+  @override
   String get checkout => 'إتمام الطلب';
+
+  @override
+  String get homeTitle => 'الرئيسية - ستريت بايت';
+
+  @override
+  String get changeTheme => 'تغيير المظهر';
+
+  @override
+  String get hotDeals => 'عروض مميزة على أطعمة الشارع!';
+
+  @override
+  String get firstOrderOffer => 'خصم 50% على أول طلب';
+
+  @override
+  String get fastDelivery => 'توصيل سريع بالقرب منك';
+
+  @override
+  String get exploreMeals => 'اكتشف الوجبات';
+
+  @override
+  String get mealAddedToCart => 'تمت الإضافة إلى السلة!';
+
+  @override
+  String get successOrder => 'تم تأكيد طلبك بنجاح';
 }

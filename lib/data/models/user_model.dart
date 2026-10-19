@@ -42,7 +42,6 @@ class UserModelBuilder {
   }
 
   UserModelBuilder setFullName(String name) {
-  
     if (name.isNotEmpty) {
       this.fullName = name[0].toUpperCase() + name.substring(1);
     } else {
