@@ -1,0 +1,12 @@
+{
+  "appName": "StreetBite",
+  "welcomeText": "Discover Best Street Food Nearby",
+  "login": "Login",
+  "signUp": "Sign Up",
+  "email": "Email Address",
+  "password": "Password",
+  "addToCart": "Add to Cart",
+  "totalPrice": "Total Price",
+  "cart": "Cart",
+  "checkout": "Checkout"
+}

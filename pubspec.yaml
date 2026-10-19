@@ -1,0 +1,49 @@
+name: streetbite
+description: StreetBite V1.0 - Food Discovery & Ordering App
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management & Dependency Injection
+  flutter_bloc: ^8.1.3
+  get_it: ^7.6.0
+  equatable: ^2.0.5
+
+  # Network & Caching
+  dio: ^5.4.0
+  shared_preferences: ^2.2.2
+
+  # Firebase
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.8
+  cloud_firestore: ^4.15.8
+
+  # Maps & Device Features
+  google_maps_flutter: ^2.5.3
+  image_picker: ^1.0.7
+  local_auth: ^2.1.8
+  device_info_plus: ^9.1.2
+
+  # UI Utils
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/icons/

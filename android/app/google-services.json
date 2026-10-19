@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554955103946",
+    "project_id": "streetbite-bc9d2",
+    "storage_bucket": "streetbite-bc9d2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554955103946:android:65e1533cbcd6d6d26a9e33",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEPe9Zp19eOR_uPEVxebM89VW90NsOKpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
