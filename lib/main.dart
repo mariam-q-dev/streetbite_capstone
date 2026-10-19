@@ -75,7 +75,7 @@ class StreetBiteApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
 
-                // الوضع الفاتح والداكن
+               
                 themeMode: themeMode,
 
                 theme: ThemeData(
